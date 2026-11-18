@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hari Haran JS | First-Year ECE Student Portfolio</title>
+<meta name="description" content="Portfolio of Hari Haran JS, a first-year B.Tech Electronics and Communication Engineering student at Lovely Professional University, exploring VLSI, semiconductors and embedded systems.">
+<meta name="keywords" content="Hari Haran JS, ECE, VLSI, semiconductor, embedded systems, Lovely Professional University, portfolio">
+<meta name="author" content="Hari Haran JS">
+<meta name="theme-color" content="#05070f">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hari Haran JS | First-Year ECE Student">
+<meta property="og:description" content="Exploring electronics, semiconductors and technology. Building skills today to engineer the innovations of tomorrow.">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9A%A1%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<script>
+tailwind.config={theme:{extend:{colors:{ink:'#05070f',navy:'#0a1024',electric:'#3b82f6',violet:'#8b5cf6'},fontFamily:{display:['Space Grotesk','system-ui','sans-serif'],sans:['Inter','system-ui','sans-serif']}}}}
+</script>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:dark}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 80px);height:100%}
+body{background:#05070f;color:#cbd5e1;font-family:Inter,system-ui,sans-serif;margin:0;overflow-x:hidden}
+.glass{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-radius:1rem;transition:transform .3s,border-color .3s,box-shadow .3s}
+.glass:hover{border-color:rgba(99,130,255,.5);box-shadow:0 10px 40px -12px rgba(99,102,241,.45);transform:translateY(-4px)}
+.grad{background:linear-gradient(90deg,#3b82f6,#8b5cf6);-webkit-background-clip:text;background-clip:text;color:transparent}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.8rem 1.5rem;border-radius:999px;font-weight:600;transition:all .25s;cursor:pointer;border:1px solid transparent}
+.btn-primary{background:linear-gradient(90deg,#3b82f6,#8b5cf6);color:#fff;box-shadow:0 8px 30px -8px rgba(99,102,241,.7)}
+.btn-primary:hover{transform:translateY(-2px) scale(1.03)}
+.btn-ghost{border-color:rgba(255,255,255,.2);color:#e2e8f0;background:rgba(255,255,255,.04)}
+.btn-ghost:hover{border-color:#3b82f6;color:#fff;transform:translateY(-2px)}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s}
+.reveal.in{opacity:1;transform:none}
+.blob{position:fixed;border-radius:50%;filter:blur(110px);opacity:.28;z-index:0;animation:float 14s ease-in-out infinite alternate;pointer-events:none}
+@keyframes float{to{transform:translate(40px,-50px) scale(1.15)}}
+.field{width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:.75rem;padding:.8rem 1rem;color:#fff;outline:none;transition:border-color .2s}
+.field:focus{border-color:#3b82f6}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/htm@3.1.1/dist/htm.umd.js"></script>
+<script>
+const {useState,useEffect,useRef}=React;
+const html=htm.bind(React.createElement);
+
+/* ============ EDIT YOUR CONTENT HERE ============ */
+const PROFILE={
+  name:'HARI HARAN JS',
+  role:'First-Year Electronics & Communication Engineering Student',
+  tagline:'Exploring the world of electronics, semiconductors, and technology. Building my skills today to engineer the innovations of tomorrow.',
+  resumeUrl:'' // paste a link or file path to your resume PDF, e.g. 'resume.pdf'
+};
+const LINKS={
+  email:'jshari2008@gmail.com',                       // replace
+  linkedin:'https://www.linkedin.com/in/hari-haran-js-6943a8427/',   // replace
+  github:'https://github.com/jshari2008-gif'              // replace
+};
+// level: 1 Beginner · 2 Learning · 3 Developing · 4 Proficient · 5 Advanced (edit honestly)
+const LEVELS=['','Beginner','Learning','Developing','Proficient','Advanced'];
+const SKILLS=[
+  {name:'C Programming',level:2,icon:'{ }'},
+  {name:'Python Programming',level:2,icon:'🐍'},
+  {name:'HTML & CSS',level:2,icon:'</>'},
+  {name:'Basic Electronics',level:2,icon:'⚡'},
+  {name:'Circuit Design',level:1,icon:'⌁'},
+  {name:'Problem Solving',level:3,icon:'🧩'},
+  {name:'Communication',level:3,icon:'💬'},
+  {name:'Teamwork',level:3,icon:'🤝'}
+];
+// status: 'Live' | 'In Progress' | 'Planned'. Add image:'url', github:'url', live:'url' when ready.
+const PROJECTS=[
+  {title:'Personal Portfolio Website',status:'Live',desc:'This responsive portfolio, built with React and Tailwind CSS to present my journey as an ECE student.',tags:['React','Tailwind CSS'],image:'',github:'',live:''},
+  {title:'Python Programming Projects',status:'Planned',desc:'Placeholder: small beginner projects to practise Python fundamentals. Details will be added as I build them.',tags:['Python'],image:'',github:'',live:''},
+  {title:'Electronics & Embedded Systems Projects',status:'Planned',desc:'Placeholder: hands-on circuits and microcontroller experiments to turn theory into working hardware.',tags:['Electronics','Embedded'],image:'',github:'',live:''},
+  {title:'Future VLSI Projects',status:'Planned',desc:'Placeholder: digital design exercises in Verilog/HDL once I have covered the fundamentals.',tags:['Verilog','HDL','VLSI'],image:'',github:'',live:''}
+];
+// Add entries like {type:'Certification',title:'…',issuer:'…',date:'…',link:''}
+const ACHIEVEMENTS=[];
+const ACH_TYPES=[['Online Certifications','🎓'],['Technical Workshops','🛠️'],['Hackathons','🏁'],['Academic Achievements','📚'],['Technical Events','📡']];
+const JOURNEY=[
+  'Learn programming fundamentals',
+  'Understand digital electronics',
+  'Explore semiconductor technology',
+  'Learn Verilog and HDL',
+  'Develop VLSI design skills',
+  'Build practical engineering projects'
+];
+const NAV=['About','Education','Skills','Projects','Achievements','Journey','Contact'];
+/* ================================================= */
+
+const Icon={
+  github:'M12 .5a11.5 11.5 0 00-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 015.78 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.82 1.19 3.08 0 4.42-2.7 5.4-5.27 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0012 .5z',
+  linkedin:'M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 110-4.12 2.06 2.06 0 010 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.23 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.73V1.73C24 .77 23.21 0 22.23 0z',
+  mail:'M2 5.5A2.5 2.5 0 014.5 3h15A2.5 2.5 0 0122 5.5v13a2.5 2.5 0 01-2.5 2.5h-15A2.5 2.5 0 012 18.5v-13zm2.2.3l7.8 6.2 7.8-6.2H4.2zm15.8 2.1l-8 6.4-8-6.4v10.6c0 .3.2.5.5.5h15c.3 0 .5-.2.5-.5V7.9z'
+};
+const Svg=({d,s=20})=>html`<svg width=${s} height=${s} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d=${d}/></svg>`;
+
+function Reveal({children,className='',delay=0}){
+  const r=useRef(null);
+  useEffect(()=>{const el=r.current;const io=new IntersectionObserver(([e])=>{if(e.isIntersecting){el.classList.add('in');io.disconnect()}},{threshold:.12});io.observe(el);return()=>io.disconnect()},[]);
+  return html`<div ref=${r} className=${'reveal '+className} style=${{transitionDelay:delay+'ms'}}>${children}</div>`;
+}
+function Section({id,title,kicker,children}){
+  return html`<section id=${id} className="relative z-10 px-5 sm:px-8 py-20 sm:py-28 max-w-6xl mx-auto">
+    <${Reveal}><p className="font-display text-sm tracking-[.25em] uppercase text-electric mb-2">${kicker}</p>
+    <h2 className="font-display text-3xl sm:text-5xl font-bold text-white mb-12">${title}</h2><//>
+    ${children}
+  </section>`;
+}
+
+function Background(){
+  const c=useRef(null);
+  useEffect(()=>{
+    const cv=c.current,x=cv.getContext('2d');let w,h,raf,P=[];
+    const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+    const size=()=>{w=cv.width=innerWidth;h=cv.height=innerHeight;P=Array.from({length:Math.min(60,Math.floor(w/22))},()=>({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35}))};
+    const draw=()=>{x.clearRect(0,0,w,h);
+      for(const p of P){p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>w)p.vx*=-1;if(p.y<0||p.y>h)p.vy*=-1;x.fillStyle='rgba(99,130,255,.7)';x.fillRect(p.x-1.5,p.y-1.5,3,3)}
+      for(let i=0;i<P.length;i++)for(let j=i+1;j<P.length;j++){const a=P[i],b=P[j],d=Math.hypot(a.x-b.x,a.y-b.y);if(d<130){x.strokeStyle='rgba(120,110,255,'+(.22*(1-d/130))+')';x.beginPath();x.moveTo(a.x,a.y);x.lineTo(a.x,b.y);x.lineTo(b.x,b.y);x.stroke()}}
+      if(!reduce)raf=requestAnimationFrame(draw)};
+    size();draw();addEventListener('resize',size);
+    return()=>{cancelAnimationFrame(raf);removeEventListener('resize',size)};
+  },[]);
+  return html`<div aria-hidden="true">
+    <div className="blob" style=${{width:420,height:420,background:'#3b82f6',top:'-8%',left:'-8%'}}></div>
+    <div className="blob" style=${{width:380,height:380,background:'#8b5cf6',bottom:'-10%',right:'-6%',animationDelay:'-6s'}}></div>
+    <canvas ref=${c} className="fixed inset-0 z-0 pointer-events-none"></canvas>
+  </div>`;
+}
+
+function Nav(){
+  const [open,setOpen]=useState(false);const [solid,setSolid]=useState(false);
+  useEffect(()=>{const f=()=>setSolid(scrollY>30);f();addEventListener('scroll',f,{passive:true});return()=>removeEventListener('scroll',f)},[]);
+  return html`<header className=${'fixed top-0 inset-x-0 z-50 transition-all '+(solid||open?'bg-ink/80 backdrop-blur-lg border-b border-white/10':'')} style=${{paddingTop:'env(safe-area-inset-top,0px)'}}>
+    <nav className="max-w-6xl mx-auto flex items-center justify-between px-5 sm:px-8 h-16" aria-label="Main">
+      <a href="#home" className="font-display font-bold text-white text-lg">HH<span className="grad">.</span>JS</a>
+      <ul className="hidden md:flex gap-7 text-sm">${NAV.map(n=>html`<li key=${n}><a className="hover:text-white transition-colors" href=${'#'+n.toLowerCase()}>${n}</a></li>`)}</ul>
+      <button className="md:hidden text-white p-2" aria-label="Toggle menu" aria-expanded=${open} onClick=${()=>setOpen(!open)}>
+        <svg width="26" height="26" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" fill="none"><path d=${open?'M6 6l12 12M18 6L6 18':'M4 7h16M4 12h16M4 17h16'}/></svg></button>
+    </nav>
+    ${open&&html`<ul className="md:hidden px-5 pb-5 grid gap-1">${NAV.map(n=>html`<li key=${n}><a onClick=${()=>setOpen(false)} className="block py-3 border-b border-white/5 text-slate-200" href=${'#'+n.toLowerCase()}>${n}</a></li>`)}</ul>`}
+  </header>`;
+}
+
+function Hero({toast}){
+  const resume=()=>{
+    if(PROFILE.resumeUrl){const a=document.createElement('a');a.href=PROFILE.resumeUrl;a.download='Hari_Haran_JS_Resume.pdf';a.target='_blank';a.rel='noopener';a.click()}
+    else toast('Resume not added yet. Set PROFILE.resumeUrl in the content config.');
+  };
+  return html`<section id="home" className="relative z-10 min-h-screen flex items-center px-5 sm:px-8 pt-24 pb-16">
+    <div className="max-w-6xl mx-auto w-full">
+      <p className="inline-flex items-center gap-2 glass !rounded-full px-4 py-1.5 text-xs sm:text-sm mb-6 hover:!transform-none"><span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>B.Tech ECE · Lovely Professional University</p>
+      <h1 className="font-display font-bold text-white text-4xl sm:text-6xl lg:text-7xl leading-tight">Hi, I’m <span className="grad">${PROFILE.name}</span></h1>
+      <h2 className="mt-4 text-lg sm:text-2xl text-slate-300 font-display">${PROFILE.role}</h2>
+      <p className="mt-6 max-w-2xl text-base sm:text-lg text-slate-400 leading-relaxed">${PROFILE.tagline}</p>
+      <div className="mt-10 flex flex-wrap gap-4">
+        <a href="#projects" className="btn btn-primary">Explore My Portfolio →</a>
+        <button onClick=${resume} className="btn btn-ghost">⬇ Download Resume</button>
+      </div>
+    </div>
+  </section>`;
+}
+
+function About(){
+  const tags=['Electronics','VLSI Design','Semiconductor Technology','Embedded Systems','Innovation'];
+  return html`<${Section} id="about" kicker="Who I am" title="About Me">
+    <div className="grid md:grid-cols-5 gap-6">
+      <${Reveal} className="md:col-span-3"><div className="glass p-7 h-full">
+        <p className="leading-relaxed text-slate-300">I’m an enthusiastic first-year Electronics and Communication Engineering student at Lovely Professional University. I’m curious about how the chips and circuits behind modern devices are designed, and I’m drawn to electronics, VLSI design, semiconductor technology, embedded systems and innovation.</p>
+        <p className="leading-relaxed text-slate-300 mt-4">I’m early in my journey, and that’s the point: I’m willing to learn, explore and practise consistently, with the goal of developing real-world engineering solutions.</p>
+      </div><//>
+      <${Reveal} className="md:col-span-2" delay=${120}><div className="glass p-7 h-full">
+        <h3 className="font-display text-white text-lg mb-4">Areas of interest</h3>
+        <div className="flex flex-wrap gap-2">${tags.map(t=>html`<span key=${t} className="px-3 py-1.5 rounded-full text-sm bg-electric/10 border border-electric/30 text-blue-200">${t}</span>`)}</div>
+      </div><//>
+    </div>
+  <//>`;
+}
+
+function Education(){
+  const steps=[
+    {t:'Year 1',s:'Current',d:'Building fundamentals in programming, physics, mathematics and basic electronics.',now:true},
+    {t:'Years 2–4',s:'Upcoming',d:'Core ECE subjects, digital design and specialisation. Details to be added as I progress.'}
+  ];
+  return html`<${Section} id="education" kicker="Academics" title="Education">
+    <${Reveal}><div className="glass p-7 mb-10">
+      <h3 className="font-display text-white text-xl">B.Tech in Electronics and Communication Engineering</h3>
+      <p className="text-slate-400 mt-1">Lovely Professional University, Punjab, India</p>
+      <p className="mt-3 text-sm text-blue-300">Currently pursuing First Year</p>
+    </div><//>
+    <ol className="relative border-l border-white/15 ml-3 space-y-8">${steps.map((s,i)=>html`<li key=${s.t} className="pl-8 relative">
+      <${Reveal} delay=${i*120}>
+        <span className=${'absolute -left-[9px] top-1.5 w-4 h-4 rounded-full '+(s.now?'bg-electric shadow-[0_0_14px_#3b82f6]':'bg-navy border border-white/30')}></span>
+        <div className="flex flex-wrap items-center gap-3"><h4 className="font-display text-white text-lg">${s.t}</h4><span className=${'text-xs px-2.5 py-0.5 rounded-full border '+(s.now?'border-electric/50 text-blue-300':'border-white/20 text-slate-400')}>${s.s}</span></div>
+        <p className="text-slate-400 mt-1 max-w-xl">${s.d}</p>
+      <//></li>`)}</ol>
+  <//>`;
+}
+
+function Skills(){
+  return html`<${Section} id="skills" kicker="What I’m learning" title="Skills">
+    <p className="text-slate-400 -mt-6 mb-8 max-w-2xl">Honest self-assessment for a first-year student. Levels are editable in the SKILLS list at the top of the code.</p>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">${SKILLS.map((s,i)=>html`<${Reveal} key=${s.name} delay=${(i%4)*80}>
+      <div className="glass p-5 h-full">
+        <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-electric/30 to-violet/30 grid place-items-center text-white font-display mb-4">${s.icon}</div>
+        <h3 className="text-white font-medium">${s.name}</h3>
+        <div className="flex gap-1.5 mt-3" role="img" aria-label=${LEVELS[s.level]+' level'}>${[1,2,3,4,5].map(n=>html`<span key=${n} className=${'h-1.5 flex-1 rounded-full '+(n<=s.level?'bg-gradient-to-r from-electric to-violet':'bg-white/10')}></span>`)}</div>
+        <p className="text-xs text-slate-400 mt-2">${LEVELS[s.level]}</p>
+      </div><//>`)}</div>
+  <//>`;
+}
+
+function Projects(){
+  const badge={Live:'text-emerald-300 border-emerald-400/40',['In Progress']:'text-amber-300 border-amber-400/40',Planned:'text-slate-300 border-white/25'};
+  return html`<${Section} id="projects" kicker="Things I build" title="Projects">
+    <div className="grid md:grid-cols-2 gap-6">${PROJECTS.map((p,i)=>html`<${Reveal} key=${p.title} delay=${(i%2)*100}>
+      <article className="glass overflow-hidden h-full flex flex-col">
+        ${p.image?html`<img src=${p.image} alt=${p.title} loading="lazy" className="h-40 w-full object-cover"/>`:html`<div className="h-40 grid place-items-center bg-gradient-to-br from-electric/20 via-navy to-violet/25 text-5xl" aria-hidden="true">${['🌐','🐍','🔌','🧠'][i%4]}</div>`}
+        <div className="p-6 flex flex-col flex-1">
+          <div className="flex items-start justify-between gap-3"><h3 className="font-display text-white text-lg">${p.title}</h3><span className=${'shrink-0 text-xs px-2.5 py-0.5 rounded-full border '+badge[p.status]}>${p.status}</span></div>
+          <p className="text-slate-400 text-sm mt-3 flex-1">${p.desc}</p>
+          <div className="flex flex-wrap gap-2 mt-4">${p.tags.map(t=>html`<span key=${t} className="text-xs px-2 py-1 rounded-md bg-white/5 text-slate-300">${t}</span>`)}</div>
+          <div className="flex gap-3 mt-5 text-sm">
+            ${p.github?html`<a href=${p.github} target="_blank" rel="noopener" className="text-blue-300 hover:text-white">GitHub ↗</a>`:html`<span className="text-slate-500">GitHub link: coming soon</span>`}
+            ${p.live&&html`<a href=${p.live} target="_blank" rel="noopener" className="text-blue-300 hover:text-white">Live ↗</a>`}
+          </div>
+        </div>
+      </article><//>`)}</div>
+  <//>`;
+}
+
+function Achievements(){
+  return html`<${Section} id="achievements" kicker="Recognition" title="Certifications & Achievements">
+    ${ACHIEVEMENTS.length?html`<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">${ACHIEVEMENTS.map((a,i)=>html`<${Reveal} key=${i}><div className="glass p-6 h-full"><p className="text-xs text-blue-300">${a.type}${a.date?' · '+a.date:''}</p><h3 className="text-white font-display mt-1">${a.title}</h3><p className="text-slate-400 text-sm">${a.issuer}</p>${a.link&&html`<a className="text-sm text-blue-300" href=${a.link} target="_blank" rel="noopener">View ↗</a>`}</div><//>`)}</div>`
+    :html`<${Reveal}><div className="glass p-8 text-center hover:!transform-none">
+      <p className="text-white font-display text-lg">Nothing listed yet, and that’s honest.</p>
+      <p className="text-slate-400 mt-2 max-w-xl mx-auto">Entries will appear here as I earn them. Add them to the ACHIEVEMENTS list in the code.</p>
+      <div className="mt-6 flex flex-wrap justify-center gap-3">${ACH_TYPES.map(([t,e])=>html`<span key=${t} className="text-sm px-4 py-2 rounded-full border border-dashed border-white/20 text-slate-400">${e} ${t}</span>`)}</div>
+    </div><//>`}
+  <//>`;
+}
+
+function Journey(){
+  return html`<${Section} id="journey" kicker="Goals" title="My Learning Journey">
+    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">${JOURNEY.map((g,i)=>html`<${Reveal} key=${g} delay=${(i%3)*90}>
+      <div className="glass p-6 h-full flex gap-4 items-start">
+        <span className="font-display text-3xl font-bold grad">${String(i+1).padStart(2,'0')}</span>
+        <div><h3 className="text-white font-medium">${g}</h3><p className="text-xs text-slate-500 mt-1">Goal</p></div>
+      </div><//>`)}</div>
+  <//>`;
+}
+
+function Contact({toast}){
+  const [f,setF]=useState({name:'',email:'',message:''});
+  const set=k=>e=>setF({...f,[k]:e.target.value});
+  const submit=e=>{e.preventDefault();
+    const body=encodeURIComponent(f.message+'\n\n— '+f.name+' ('+f.email+')');
+    location.href='mailto:'+LINKS.email+'?subject='+encodeURIComponent('Portfolio message from '+f.name)+'&body='+body;
+    toast('Opening your email app…');};
+  const soc=[['GitHub',LINKS.github,Icon.github],['LinkedIn',LINKS.linkedin,Icon.linkedin],['Email','mailto:'+LINKS.email,Icon.mail]];
+  return html`<${Section} id="contact" kicker="Let’s connect" title="Contact">
+    <div className="grid md:grid-cols-2 gap-6">
+      <${Reveal}><div className="glass p-7 h-full hover:!transform-none">
+        <p className="text-slate-300">Open to conversations with professors, recruiters, hackathon teams and fellow learners.</p>
+        <ul className="mt-6 space-y-3 text-sm">
+          <li><a className="hover:text-white" href=${'mailto:'+LINKS.email}>✉ ${LINKS.email}</a></li>
+          <li><a className="hover:text-white" href=${LINKS.linkedin} target="_blank" rel="noopener">in LinkedIn profile</a></li>
+          <li><a className="hover:text-white" href=${LINKS.github} target="_blank" rel="noopener">⌥ GitHub profile</a></li>
+        </ul>
+        <div className="flex gap-3 mt-8">${soc.map(([n,u,d])=>html`<a key=${n} href=${u} target="_blank" rel="noopener" aria-label=${n} className="w-11 h-11 grid place-items-center rounded-full border border-white/15 text-slate-300 hover:text-white hover:border-electric hover:-translate-y-1 transition"><${Svg} d=${d}/></a>`)}</div>
+      </div><//>
+      <${Reveal} delay=${120}><form onSubmit=${submit} className="glass p-7 space-y-4 hover:!transform-none">
+        <label className="block text-sm">Name<input required className="field mt-1" value=${f.name} onChange=${set('name')} autoComplete="name"/></label>
+        <label className="block text-sm">Email<input required type="email" className="field mt-1" value=${f.email} onChange=${set('email')} autoComplete="email"/></label>
+        <label className="block text-sm">Message<textarea required rows="4" className="field mt-1" value=${f.message} onChange=${set('message')}></textarea></label>
+        <button type="submit" className="btn btn-primary w-full">Send Message</button>
+      </form><//>
+    </div>
+  <//>`;
+}
+
+function App(){
+  const [msg,setMsg]=useState('');
+  const toast=m=>{setMsg(m);clearTimeout(window.__t);window.__t=setTimeout(()=>setMsg(''),3500)};
+  return html`<div className="relative">
+    <${Background}/><${Nav}/>
+    <main><${Hero} toast=${toast}/><${About}/><${Education}/><${Skills}/><${Projects}/><${Achievements}/><${Journey}/><${Contact} toast=${toast}/></main>
+    <footer className="relative z-10 text-center text-sm text-slate-500 py-10 border-t border-white/5">© ${new Date().getFullYear()} ${PROFILE.name} · Built with React & Tailwind CSS</footer>
+    ${msg&&html`<div role="status" className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 glass !rounded-full px-5 py-3 text-sm text-white hover:!transform-none" style=${{bottom:'calc(env(safe-area-inset-bottom,0px) + 24px)'}}>${msg}</div>`}
+  </div>`;
+}
+ReactDOM.createRoot(document.getElementById('root')).render(html`<${App}/>`);
+</script>
+</body>
+</html>
